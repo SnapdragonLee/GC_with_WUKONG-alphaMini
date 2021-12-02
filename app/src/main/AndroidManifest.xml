@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ubtrobot.mini.sdkdemo">
+
+    <uses-permission android:name="com.ubtrobot.master.permission.MASTER" />
+    <uses-permission android:name="com.ubtrobot.master.permission.MASTER_SYSTEM_SERVICE" />
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <!--  <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"-->
+    <!--      tools:ignore="ProtectedPermissions" />-->
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <application
+        android:name="com.ubtrobot.mini.sdkdemo.DemoApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <!--    <meta-data android:name="ubt-master-app" android:value="third_part_speechservice"/>-->
+
+        <activity android:name="com.ubtrobot.mini.sdkdemo.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.ActionApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.ExpressApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.SpeechApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.MotorApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.FaceApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.ObjectDetectApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.TakePicApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.MouthLedApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.SysEventApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.SysApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.StandupApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.SkillApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.PowerApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.BehaviorActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.RobotInitActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.DiscorverActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.PhoneCallApiActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.ApkSilentInstallerApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.BuiltInSkillCallTestActivity"
+            android:theme="@style/AppTheme" />
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.DemoSkill"
+            android:exported="true">
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/demo_skill_path" />
+        </service>
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.skills.InterruptibleSkill"
+            android:exported="true">
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/demo_interruptible_skill" />
+        </service>
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.skills.UnInterruptibleSkill"
+            android:exported="true">
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/demo_uninterruptible_skill" />
+        </service>
+
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.skills.ParallelSkill"
+            android:exported="true">
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/demo_parallel_skill" />
+        </service>
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.skills.NoRecordInterrutibleSkill"
+            android:exported="true">
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/demo_norecord_in_skill" />
+        </service>
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.skills.NoRecordUnInterrutibleSkill"
+            android:exported="true">
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/demo_norecord_unin_skill" />
+        </service>
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.skills.LowpowerInterruptibleSkill"
+            android:exported="true">
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/demo_lp_interruptible_skill" />
+        </service>
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.skills.LowpowerUnInterruptibleSkill"
+            android:exported="true">
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/demo_lp_uninterruptible_skill" />
+        </service>
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.skills.MyClassificationSkillDemo"
+            android:exported="true"> <!-- 技能类名 -->
+            <meta-data
+                android:name="master.skill"
+                android:resource="@xml/my_classification_skill" />  <!-- name 是固定值 “master.skill” resouce 填写 xml 目录下定义的xml文件-->
+        </service>
+
+        <meta-data
+            android:name="ubt-master-app"
+            android:value="custom" />
+    </application>
+
+</manifest>

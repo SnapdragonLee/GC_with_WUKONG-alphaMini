@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<skill name="my_classification_skill"> <!--定义skill名称 自定义-->
+    <call path="/my_classification/startSkill"> <!--定义skill调用路径 与代码中 @Call(path = "/demo_interruptible/startSkill") 这个注解保持一致-->
+        <intent-filter category="speech">  <!-- 定义可以语音触发的fliter 固定配置-->
+            <utterance sentence="classification" /> <!--填写叮当平台上定义的意图标识-->
+        </intent-filter>
+    </call>
+</skill>
