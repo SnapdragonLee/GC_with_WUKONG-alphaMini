@@ -46,7 +46,6 @@ public class TakePicApiActivity extends Activity {
             public void onResponseSuccess(String string) {
                 Log.i(TAG, "takePicImmediately接口调用成功！");
                 Toast.makeText(getApplicationContext(), "saving " + string, Toast.LENGTH_LONG).show();
-                MyClassificationSkillDemo.setPicturePath(string);
             }
 
             @Override

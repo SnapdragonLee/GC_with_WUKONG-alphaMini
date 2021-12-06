@@ -7,6 +7,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 样例JSON
+ * {
+ *     "numbers": 1,
+ *     "data": [
+ *         {
+ *             "name": "塑料袋",
+ *             "type": "其他垃圾",
+ *         }
+ *     ]
+ * }
+ * 解析该JSON的工具类，调用该类的构造方法即可得到解析后的内容
+ */
 public class JsonTool {
     private final int numbers;
     private final List<DataEle> data = new ArrayList<>();

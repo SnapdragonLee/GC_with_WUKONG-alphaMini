@@ -1,16 +1,19 @@
 package com.ubtrobot.mini.sdkdemo.tools;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import java.io.*;
 import java.net.Socket;
 
 import android.util.Base64;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+/**
+ * 使用方法，在声明类后，设定imgPath，新建线程并start该线程
+ * 样例代码如下
+ * String imgPath = "your Img Path"
+ * MyClient client = new MyClient();
+ * client.setImgPath(imgPath);
+ * new Thread(client).start();
+ * String ans = client.getAns();
+ * 调用getAns得到答案
+ */
 public class MyClient implements Runnable {
     private final static String BASE_PATH = "/sdcard";
     private Socket socket = null;
@@ -18,7 +21,6 @@ public class MyClient implements Runnable {
     private InputStream inputStream = null;
     private final String ADDRESS = "192.168.43.31";
     private final int PORT = 1017;
-    private boolean connected = false;
     private String imgPath;
     private String ans = null;
 
@@ -33,9 +35,8 @@ public class MyClient implements Runnable {
     }
 
     /**
-     * 声明类后调用该方法连接服务端
+     * 声明类后调用该方法连接服务端并得到答案，答案存储在ans中
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void run() {
 
@@ -45,6 +46,7 @@ public class MyClient implements Runnable {
                 outputStream = socket.getOutputStream();
                 inputStream = socket.getInputStream();
                 ans = callServer(BASE_PATH + this.imgPath);
+                endConnect();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,8 +61,7 @@ public class MyClient implements Runnable {
      * @return String格式的Json数据，可以用java内的json相关包处理
      * @throws IOException 若网络或服务器出现问题则会产生
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public String callServer(byte[] imgData) throws IOException {
+    private String callServer(byte[] imgData) throws IOException {
         byte[] b64img = Base64.encode(imgData, Base64.NO_WRAP);
 
         outputStream.write(intToByteArray(b64img.length));
@@ -89,8 +90,7 @@ public class MyClient implements Runnable {
      *                     同时 当照片格式不合法时会产生 RuntimeException("Illegal IMG file name")
      *                     当照片尾缀为不合法类型会由 ImageIO.write 抛出异常
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public String callServer(String imgPath) throws IOException {
+    private String callServer(String imgPath) throws IOException {
         return callServer(readImg(imgPath));
     }
 
@@ -103,7 +103,7 @@ public class MyClient implements Runnable {
      *                     同时 当照片格式不合法时会产生 RuntimeException("Illegal IMG file name")
      *                     当照片尾缀为不合法类型会由 ImageIO.write 抛出异常
      */
-    public byte[] readImg(String imgPath) throws IOException {
+    private byte[] readImg(String imgPath) throws IOException {
         this.imgPath = imgPath;
         return readLocalFile();
     }
@@ -131,11 +131,16 @@ public class MyClient implements Runnable {
      *
      * @throws IOException socket若尚未连接则会产生
      */
-    public void endConnect() throws IOException {
+    private void endConnect() throws IOException {
         socket.close();
-        connected = false;
     }
 
+    /**
+     * 工具功能，返回数字的大端存储bytes
+     *
+     * @param i 数字
+     * @return 答案数组
+     */
     public static byte[] intToByteArray(int i) {
         byte[] result = new byte[4];
         result[0] = (byte) ((i >> 24) & 0xFF);
@@ -143,9 +148,5 @@ public class MyClient implements Runnable {
         result[2] = (byte) ((i >> 8) & 0xFF);
         result[3] = (byte) (i & 0xFF);
         return result;
-    }
-
-    public boolean isConnected() {
-        return connected;
     }
 }

@@ -51,7 +51,7 @@ public class ClassificationSkillThread extends Thread {
         voicePool = VoicePool.get();
         client.setImgPath(imgPath);
         new Thread(client).start();
-        voicePool.playTTs("拍完了，正在连接分析服务器", Priority.HIGH, null);
+        voicePool.playTTs("拍完了，正在分析", Priority.HIGH, null);
         String ans = client.getAns();
         String solution = ansAnalyse(ans);
         voicePool.playTTs(solution, Priority.HIGH, null);
